@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: bank-app
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - bank-app-net
+
+  mysql:
+    image: mysql:8.0
+    container_name: bank-app-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysqldata:/var/lib/mysql
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "bank_app"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "root"
+    networks:
+      bank-app-net:
+        ipv4_address: 10.120.0.10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: coding-test-phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - 8080:80
+    networks:
+      - bank-app-net
+
+volumes:
+  mysqldata:
+    driver: local
+
+networks:
+  bank-app-net:
+    name: bank-app-net
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.120.0.0/16"
+
