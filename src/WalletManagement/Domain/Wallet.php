@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Model\Entity;
+namespace App\WalletManagement\Domain;
 
 use DateTimeImmutable;
+use Ramsey\Uuid\UuidInterface;
+use App\WalletManagement\Domain\Balance;
 use Doctrine\ORM\Mapping as ORM;
-use App\Model\ValueObject\Balance;
-use App\Repository\WalletRepository;
+use App\WalletManagement\Domain\WalletRepository;
 
 #[ORM\Entity(repositoryClass: WalletRepository::class)]
 class Wallet
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'uuid')]
+    private ?UuidInterface $id;
 
     #[ORM\Column(length: 255)]
     private ?string $name;
@@ -27,13 +27,14 @@ class Wallet
     #[ORM\Column]
     private ?DateTimeImmutable $updated_at = null;
 
-    public function __construct(?string $name, ?Balance $balance)
+    public function __construct(UuidInterface $id, ?string $name = null, ?Balance $balance = null)
     {
+        $this->id = $id;
         $this->name = $name;
         $this->balance = $balance;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

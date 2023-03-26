@@ -1,9 +1,7 @@
 <?php
 
-namespace App\Model\ValueObject;
+namespace App\WalletManagement\Domain;
 
-use App\Enum\Currency;
-use App\Constant\Numbers;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]
@@ -46,7 +44,10 @@ class Balance
 
     private function parseStringValue(string $value): int
     {
-        str_replace(Numbers::POSSIBLE_SEPARATORS, Numbers::SEPARATOR, $value);
-        return round(round($value, Numbers::DECIMAL_PLACES) * Numbers::MULTIPLAYER);
+        $decimalPlaces = 2;
+        $decimalMultiplier = 10;
+        str_replace([','], ['.'], $value);
+
+        return round(round($value, $decimalPlaces) * $decimalMultiplier);
     }
 }
