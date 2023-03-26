@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230326190228 extends AbstractMigration
+final class Version20230326191520 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Create wallet table.';
+        return '';
     }
 
     public function up(Schema $schema): void
@@ -23,10 +23,10 @@ final class Version20230326190228 extends AbstractMigration
         $this->addSql('CREATE TABLE wallet (
                 id CHAR(36) NOT NULL COMMENT \'(DC2Type:uuid)\',
                 name VARCHAR(255) NOT NULL,
+                created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
+                updated_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\',
                 balance_value INT NOT NULL,
                 balance_currency VARCHAR(3) NOT NULL,
-                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT \'(DC2Type:datetime_immutable)\',
-                updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT \'(DC2Type:datetime_immutable)\',
                 PRIMARY KEY(id)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB'
         );
