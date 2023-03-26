@@ -1,5 +1,5 @@
 controllers:
     resource:
-        path: ../src/Wallet/Infrastructure/
+        path: ../src/WalletManagement/Infrastructure/
         namespace: App\WalletManagement\Infrastructure
     type: attribute

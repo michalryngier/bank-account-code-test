@@ -3,8 +3,7 @@
 namespace App\Shared\Infrastructure;
 
 use App\Shared\Application\CommandInterface;
-
-use App\Shared\Exception\HandlerNotFoundException;
+use App\Shared\Domain\Exception\HandlerNotFoundException;
 
 use function get_class;
 

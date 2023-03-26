@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Shared\Exception;
+namespace App\Shared\Domain\Exception;
 
 use Exception;
-use Symfony\Config\Framework\ExceptionConfig;
 
 class HandlerNotFoundException extends Exception
 {

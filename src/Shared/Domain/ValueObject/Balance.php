@@ -1,9 +1,11 @@
 <?php
 
-namespace App\WalletManagement\Domain;
+namespace App\Shared\Domain\ValueObject;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Shared\Domain\Enum\Currency;
 
+#[ORM\Embeddable]
 class Balance
 {
     #[ORM\Column]
@@ -29,16 +31,6 @@ class Balance
     public function getCurrency(): Currency
     {
         return $this->currency;
-    }
-
-    public function isEqual(Balance $other): bool
-    {
-        return $this->currency === $other->getCurrency() && $this->value === $other->getValue();
-    }
-
-    public function toString(): string
-    {
-        return sprintf('%01.2f %s', ($this->value / 100), $this->currency->name);
     }
 
     private function parseStringValue(string $value): int

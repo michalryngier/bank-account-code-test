@@ -3,7 +3,7 @@
 namespace App\Shared\Infrastructure;
 
 use App\Shared\Application\QueryInterface;
-use App\Shared\Exception\HandlerNotFoundException;
+use App\Shared\Domain\Exception\HandlerNotFoundException;
 
 class BasicQueryBus implements QueryBusInterface
 {
