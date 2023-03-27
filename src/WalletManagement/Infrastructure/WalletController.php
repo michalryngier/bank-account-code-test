@@ -79,7 +79,7 @@ class WalletController extends AbstractController
      * @throws ExceptionInterface
      * @throws WalletNotFoundException
      */
-    #[Route('/{id}/balance/deposit', name: 'api_wallet_balance_add', methods: ['PUT'])]
+    #[Route('/{id}/deposit', name: 'api_wallet_balance_add', methods: ['PUT'])]
     public function increaseBalance(Request $request): Response
     {
         $decodedBody = json_decode($request->getContent(), true);
@@ -102,7 +102,7 @@ class WalletController extends AbstractController
      * @throws ExceptionInterface
      * @throws WalletNotFoundException
      */
-    #[Route('/{id}/balance/withdraw', name: 'api_wallet_balance_subtract', methods: ['PUT'])]
+    #[Route('/{id}/withdraw', name: 'api_wallet_balance_subtract', methods: ['PUT'])]
     public function decreaseBalance(Request $request): Response
     {
         $decodedBody = json_decode($request->getContent(), true);
