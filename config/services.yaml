@@ -13,25 +13,35 @@ services:
       - '../src/Kernel.php'
 
 
-  command_bus:
-    class: App\Shared\Infrastructure\SynchronousCommandBus
+  App\Shared\Infrastructure\SynchronousCommandBus:
     arguments: [ ],
     calls:
       - map: [ 'App\WalletManagement\Application\Command\CreateWalletCommand', '@wallet.command.create.handler' ]
+      - map: [ 'App\WalletManagement\Application\Command\IncreaseBalanceCommand', '@wallet.command.increase_balance.handler' ]
+      - map: [ 'App\WalletManagement\Application\Command\DecreaseBalanceCommand', '@wallet.command.decrease_balance.handler' ]
 
 
   wallet.command.create.handler:
     class: App\WalletManagement\Application\Command\CreateWalletHandler
 
+  wallet.command.increase_balance.handler:
+    class: App\WalletManagement\Application\Command\IncreaseBalanceHandler
+
+  wallet.command.decrease_balance.handler:
+    class: App\WalletManagement\Application\Command\DecreaseBalanceHandler
+
   App\Shared\Infrastructure\BasicQueryBus:
-    class: App\Shared\Infrastructure\BasicQueryBus
     arguments: [ ],
     calls:
       - map: [ 'App\WalletManagement\Application\Query\FindAllWalletsQuery', '@wallet.query.find_all.handler' ]
       - map: [ 'App\WalletManagement\Application\Query\GetBalanceQuery', '@wallet.query.get_balance.handler' ]
+      - map: [ 'App\WalletManagement\Application\Query\GetWalletQuery', '@wallet.query.get_wallet.handler' ]
 
   wallet.query.find_all.handler:
     class: App\WalletManagement\Application\Query\FindAllWalletsHandler
 
   wallet.query.get_balance.handler:
     class: App\WalletManagement\Application\Query\GetBalanceHandler
+
+  wallet.query.get_wallet.handler:
+    class: App\WalletManagement\Application\Query\GetWalletHandler

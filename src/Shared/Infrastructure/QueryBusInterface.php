@@ -6,5 +6,5 @@ use App\Shared\Application\QueryInterface;
 
 interface QueryBusInterface
 {
-    public function handle(QueryInterface $query): object;
+    public function handle(QueryInterface $query): ?object;
 }

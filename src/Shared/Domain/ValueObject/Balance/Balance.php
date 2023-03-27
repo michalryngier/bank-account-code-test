@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Domain\ValueObject;
+namespace App\Shared\Domain\ValueObject\Balance;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Shared\Domain\Enum\Currency;
@@ -13,7 +13,7 @@ class Balance
 
     public function __construct(
         int|string $value,
-        #[ORM\Column(type: 'string', length: 3)]
+        #[ORM\Column(length: 3)]
         private readonly Currency $currency
     ) {
         if (is_string($value)) {
@@ -28,9 +28,19 @@ class Balance
         return $this->value;
     }
 
+    public function setValue(int $value): void
+    {
+        $this->value = $value;
+    }
+
     public function getCurrency(): Currency
     {
         return $this->currency;
+    }
+
+    public function toString(): string
+    {
+        return sprintf('%01.2f %s', ($this->getValue() / 100), $this->getCurrency()->name);
     }
 
     private function parseStringValue(string $value): int
@@ -40,5 +50,21 @@ class Balance
         str_replace([','], ['.'], $value);
 
         return round(round($value, $decimalPlaces) * $decimalMultiplier);
+    }
+
+    public function increaseBalance(int $amount): self
+    {
+        $balance = (new BalanceFactory($this->currency))->createBalance();
+        $balance->setValue($this->value + $amount);
+
+        return $balance;
+    }
+
+    public function decreaseBalance(int $amount): self
+    {
+        $balance = (new BalanceFactory($this->currency))->createBalance();
+        $balance->setValue($this->value - $amount);
+
+        return $balance;
     }
 }

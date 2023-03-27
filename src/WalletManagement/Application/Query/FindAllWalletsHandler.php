@@ -4,11 +4,11 @@ namespace App\WalletManagement\Application\Query;
 
 use App\Shared\Application\QueryInterface;
 use App\WalletManagement\Presentation\WalletListView;
-use App\WalletManagement\Domain\WalletRepositoryInterface;
+use App\WalletManagement\Domain\WalletManagementRepositoryInterface;
 
 final class FindAllWalletsHandler implements QueryInterface
 {
-    public function __construct(private readonly WalletRepositoryInterface $repository)
+    public function __construct(private readonly WalletManagementRepositoryInterface $repository)
     {
     }
 

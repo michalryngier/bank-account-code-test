@@ -17,7 +17,7 @@ class BasicQueryBus implements QueryBusInterface
     /**
      * @throws HandlerNotFoundException
      */
-    public function handle(QueryInterface $query): object
+    public function handle(QueryInterface $query): ?object
     {
         $fqcn = get_class($query);
         $handlerNotFound = isset($this->handlers[$fqcn]) === false;

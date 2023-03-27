@@ -5,10 +5,11 @@ namespace App\Shared\Domain\Entity;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
-use App\Shared\Domain\ValueObject\Balance;
+use App\Shared\Domain\ValueObject\Balance\Balance;
 use App\Shared\Domain\Repository\WalletRepository;
 
 #[ORM\Entity(repositoryClass: WalletRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Wallet
 {
     #[ORM\Id]
@@ -71,5 +72,28 @@ class Wallet
     public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updated_at;
+    }
+
+    public function increaseBalance(int $amount): void
+    {
+        $this->balance = $this->balance->increaseBalance($amount);
+    }
+
+    public function decreaseBalance(int $amount): void
+    {
+        $this->balance = $this->balance->decreaseBalance($amount);
+    }
+
+    #[ORM\PrePersist]
+    public function onPrePersist()
+    {
+        $this->created_at = new DateTimeImmutable("now");
+        $this->updated_at = new DateTimeImmutable("now");
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new DateTimeImmutable("now");
     }
 }
