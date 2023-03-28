@@ -19,7 +19,7 @@ class OperationData
         $this->balanceAfter = $balanceAfter;
     }
 
-    public function getBalanceBefore(): ?Balance
+    public function getBalanceBefore(): Balance
     {
         return $this->balanceBefore;
     }
@@ -31,7 +31,7 @@ class OperationData
         return $this;
     }
 
-    public function getBalanceAfter(): ?Balance
+    public function getBalanceAfter(): Balance
     {
         return $this->balanceAfter;
     }

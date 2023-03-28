@@ -1,9 +1,13 @@
 parameters:
+  default_reports_directory: '%kernel.project_dir%/runtime/reports'
+  reports_directory: '%env(string:default:default_reports_directory:REPORTS_DIR)%'
 
 services:
   _defaults:
     autowire: true
     autoconfigure: true
+    bind:
+      $reportsDirectory: '%reports_directory%'
 
   App\:
     resource: '../src/'

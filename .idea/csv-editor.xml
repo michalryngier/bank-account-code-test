@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CsvFileAttributes">
+    <option name="attributeMap">
+      <map>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-47-57.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-52-08.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-53-09.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-55-45.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-56-43.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-57-59.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-58-58.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

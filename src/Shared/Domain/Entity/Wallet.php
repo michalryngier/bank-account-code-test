@@ -5,7 +5,10 @@ namespace App\Shared\Domain\Entity;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OrderBy;
 use App\Shared\Domain\ValueObject\Balance;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use App\Shared\Domain\Repository\WalletRepository;
 
 #[ORM\Entity(repositoryClass: WalletRepository::class)]
@@ -28,6 +31,10 @@ class Wallet
     #[ORM\Column]
     private ?DateTimeImmutable $updated_at = null;
 
+    #[ORM\OneToMany(mappedBy: 'wallet', targetEntity: Operation::class, orphanRemoval: true)]
+    #[OrderBy(["created_at" => "ASC"])]
+    private Collection $operations;
+
     private Balance $_oldBalance;
 
     public function __construct(UuidInterface $id, string $name = null, Balance $balance = null)
@@ -35,6 +42,8 @@ class Wallet
         $this->id = $id;
         $this->name = $name;
         $this->balance = $balance;
+        $this->operations = new ArrayCollection();
+
         $this->_oldBalance = clone $balance;
     }
 
@@ -80,6 +89,11 @@ class Wallet
     public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updated_at;
+    }
+
+    public function getOperations(): Collection
+    {
+        return $this->operations;
     }
 
     public function increaseBalance(int $amount): self

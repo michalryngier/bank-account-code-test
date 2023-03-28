@@ -65,4 +65,19 @@ class Balance
 
         return new self($value, $this->currency);
     }
+
+    public function hasDifferentValue(Balance $balance): bool
+    {
+        return $this->value !== $balance->getValue();
+    }
+
+    public function hasDifferentCurrency(Balance $balance): bool
+    {
+        return $this->currency->value !== $balance->getCurrency()->name;
+    }
+
+    public function getValueDiff(Balance $balance): int
+    {
+        return abs($this->value - $balance->getValue());
+    }
 }

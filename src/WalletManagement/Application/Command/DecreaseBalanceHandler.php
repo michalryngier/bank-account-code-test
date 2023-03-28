@@ -29,7 +29,7 @@ final class DecreaseBalanceHandler implements CommandInterface
 
         $wallet->decreaseBalance($command->getAmount());
 
-        $operation = $this->operationFactory->createDepositOperation($wallet);
+        $operation = $this->operationFactory->createWithdrawOperation($wallet);
         $this->entityManager->persist($operation);
 
         $this->entityManager->flush();
