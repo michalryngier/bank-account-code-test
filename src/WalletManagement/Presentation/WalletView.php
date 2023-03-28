@@ -3,7 +3,7 @@
 namespace App\WalletManagement\Presentation;
 
 use Ramsey\Uuid\UuidInterface;
-use App\Shared\Domain\ValueObject\Balance\Balance as SharedBalance;
+use App\Shared\Domain\ValueObject\Balance as SharedBalance;
 
 class WalletView
 {

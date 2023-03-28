@@ -4,7 +4,7 @@ namespace App\WalletManagement\Application\Query;
 
 use App\Shared\Application\QueryInterface;
 use App\WalletManagement\Presentation\WalletListView;
-use App\WalletManagement\Domain\WalletManagementRepositoryInterface;
+use App\WalletManagement\Domain\Wallet\WalletManagementRepositoryInterface;
 
 final class FindAllWalletsHandler implements QueryInterface
 {

@@ -2,7 +2,8 @@
 
 namespace App\WalletManagement\Presentation;
 
-use App\WalletManagement\Domain\Wallet;
+
+use App\Shared\Domain\Entity\Wallet;
 
 class WalletListView
 {

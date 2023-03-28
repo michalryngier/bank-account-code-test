@@ -1,9 +1,9 @@
 <?php
 
-namespace App\WalletManagement\Domain;
+namespace App\WalletManagement\Domain\Wallet;
 
-use App\Shared\Domain\Repository\WalletRepository as SharedRepository;
 use App\Shared\Domain\Entity\Wallet as SharedWallet;
+use App\Shared\Domain\Repository\WalletRepository as SharedRepository;
 
 class WalletManagementRepository extends SharedRepository implements WalletManagementRepositoryInterface
 {

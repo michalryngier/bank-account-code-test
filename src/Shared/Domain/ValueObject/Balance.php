@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Domain\ValueObject\Balance;
+namespace App\Shared\Domain\ValueObject;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Shared\Domain\Enum\Currency;
@@ -54,17 +54,15 @@ class Balance
 
     public function increaseBalance(int $amount): self
     {
-        $balance = (new BalanceFactory($this->currency))->createBalance();
-        $balance->setValue($this->value + $amount);
+        $value = $this->value + $amount;
 
-        return $balance;
+        return new self($value, $this->currency);
     }
 
     public function decreaseBalance(int $amount): self
     {
-        $balance = (new BalanceFactory($this->currency))->createBalance();
-        $balance->setValue($this->value - $amount);
+        $value = $this->value - $amount;
 
-        return $balance;
+        return new self($value, $this->currency);
     }
 }

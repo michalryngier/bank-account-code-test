@@ -4,12 +4,8 @@ namespace App\WalletManagement\Application\Command;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use App\Shared\Domain\Enum\Currency;
 use App\Shared\Application\CommandInterface;
-use App\Shared\Domain\ValueObject\Balance\Balance;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Shared\Domain\ValueObject\Balance\BalanceFactory;
-use App\Shared\Domain\Exception\CurrencyNotSupportedException;
 
 final class CreateWalletCommand implements CommandInterface
 {
@@ -39,15 +35,8 @@ final class CreateWalletCommand implements CommandInterface
         return $this->name;
     }
 
-    /**
-     * @throws CurrencyNotSupportedException
-     */
-    public function getBalance(): Balance
+    public function getCurrency(): string
     {
-        $currency = Currency::tryFrom($this->currency);
-        $currencyNotSupported = is_null($currency);
-        CurrencyNotSupportedException::throwWhen($currencyNotSupported, $this->currency);
-
-        return (new BalanceFactory($currency))->createBalance();
+        return $this->currency;
     }
 }
