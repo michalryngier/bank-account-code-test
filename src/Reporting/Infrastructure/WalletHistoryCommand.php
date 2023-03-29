@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Shared\Domain\Exception\InvalidReportFormatException;
-use App\Reporting\Domain\Wallet\WalletReportRepositoryInterface;
+use App\Reporting\Domain\Wallet\WalletReportingRepositoryInterface;
 use App\Reporting\Application\ReportGenerator\WalletOperationsReportGeneratorFactoryInterface;
 
 #[AsCommand(
@@ -20,7 +20,7 @@ use App\Reporting\Application\ReportGenerator\WalletOperationsReportGeneratorFac
 class WalletHistoryCommand extends Command
 {
     public function __construct(
-        private readonly WalletReportRepositoryInterface $walletRepository,
+        private readonly WalletReportingRepositoryInterface $walletRepository,
         private readonly WalletOperationsReportGeneratorFactoryInterface $reportGeneratorFactory
     )
     {
