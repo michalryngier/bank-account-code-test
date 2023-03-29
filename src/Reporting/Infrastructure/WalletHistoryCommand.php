@@ -39,11 +39,12 @@ class WalletHistoryCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $wallet = $this->walletRepository->find($input->getArgument('wallet-id'));
         $reportFormat = ReportFormat::tryFrom(strtolower($input->getArgument('format')));
+        $errorMessage = "An error occurred during report generation: {message}";
 
         try {
             $reportGenerator = $this->reportGeneratorFactory->create($reportFormat);
         } catch (InvalidReportFormatException $e) {
-            $io->error("An error occurred during report generation: {$e->getMessage()}");
+            $io->error(str_replace(['{message}'], $e->getMessage(), $errorMessage));
 
             return Command::FAILURE;
         }
@@ -51,12 +52,13 @@ class WalletHistoryCommand extends Command
         try {
             $reportGenerated = $reportGenerator->generateReport($wallet);
         } catch (DirectoryNotFoundException $e) {
-            $reportGenerated = false;
-            $io->error("Exception caught: {$e->getMessage()}");
+            $io->error(str_replace(['{message}'], $e->getMessage(), $errorMessage));
+
+            return Command::FAILURE;
         }
 
         if ($reportGenerated === false) {
-            $io->error("Error occurred during report generation process.");
+            $io->error(str_replace(['{message}'], 'a report generation failed.', $errorMessage));
 
             return Command::FAILURE;
         }
