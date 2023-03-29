@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use App\Shared\Domain\Exception\DirectoryNotFoundException;
 use App\Shared\Domain\Exception\InvalidReportFormatException;
 use App\Reporting\Domain\Wallet\WalletReportingRepositoryInterface;
 use App\Reporting\Application\ReportGenerator\WalletOperationsReportGeneratorFactoryInterface;
@@ -47,7 +48,12 @@ class WalletHistoryCommand extends Command
             return Command::FAILURE;
         }
 
-        $reportGenerated = $reportGenerator->generateReport($wallet);
+        try {
+            $reportGenerated = $reportGenerator->generateReport($wallet);
+        } catch (DirectoryNotFoundException $e) {
+            $reportGenerated = false;
+            $io->error("Exception caught: {$e->getMessage()}");
+        }
 
         if ($reportGenerated === false) {
             $io->error("Error occurred during report generation process.");
