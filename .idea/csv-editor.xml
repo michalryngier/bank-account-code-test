@@ -3,7 +3,21 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/runtime/reports/8f46dcb4-13ac-4bed-bb02-5f35f5e0de6c_2023-03-29_09-40-41.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-28_13-58-58.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/runtime/reports/9186bf76-6d99-4ff4-aa60-8f62fe672a2e_2023-03-29_09-19-13.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

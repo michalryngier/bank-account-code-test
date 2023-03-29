@@ -25,7 +25,7 @@ docker exec -it bank-app /bin/sh
 # In the bank-app container bash
 
 cd ..
-php bin/console doctrine:databse:create
+php bin/console doctrine:database:create # If database does not currently exist
 php bin/console doctrine:migrations:migrate
 ```
 

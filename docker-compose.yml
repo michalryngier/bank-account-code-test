@@ -24,7 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_DATABASE: "bank_app"
       MYSQL_USER: "user"
-      MYSQL_PASSWORD: "root"
+      MYSQL_PASSWORD: "userpw"
     networks:
       bank-app-net:
         ipv4_address: 10.120.0.10
