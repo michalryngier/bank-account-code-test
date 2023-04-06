@@ -35,13 +35,13 @@ The application is preconfigured, and it's starting on http://localhost:8000.
 
 #### Endpoints
 
-| Endpoint              | Method | Body                                             | Description                                                                                                | Example Response                                               |
-|-----------------------|--------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| /wallet               | GET    | -                                                | Get a complete list of all wallets in the database                                                         | [   {     "id": "...",     "balance": "10.00 PLN"   },   ... ] |
-| /wallet               | POST   | {   "name": "Some wallet",   "currency": "PLN" } | Create a wallet with given name and currency. Supported currencies are: ["PLN", "EUR"]                     | {   "id": "..." }                                              |
-| /wallet/{id}/balance  | GET    | -                                                | Get a balance of a wallet with given id                                                                    | {   "balance": "10.00 EUR"}                                    |
-| /wallet/{id}/deposit  | PUT    | {   "amount": 1000}                              | Add a given value to a wallet's balance. A value is represented in 1/100 of unit. 1 full-unit = 100        | {   "balance": "10.00 EUR" }                                   |
-| /wallet/{id}/withdraw | PUT    | {   "amount": 500 }                              | Subtract a given value from a wallet's balance. A value is represented in 1/100 of unit. 1 full-unit = 100 | {   "balance": "5.00 EUR" }                                    |
+| Endpoint               | Method | Body                                             | Description                                                                                                | Example Response                                               |
+|------------------------|--------|--------------------------------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| /wallets               | GET    | -                                                | Get a complete list of all wallets in the database                                                         | [   {     "id": "...",     "balance": "10.00 PLN"   },   ... ] |
+| /wallets               | POST   | {   "name": "Some wallet",   "currency": "PLN" } | Create a wallet with given name and currency. Supported currencies are: ["PLN", "EUR"]                     | {   "id": "..." }                                              |
+| /wallets/{id}/balance  | GET    | -                                                | Get a balance of a wallet with given id                                                                    | {   "balance": "10.00 EUR"}                                    |
+| /wallets/{id}/deposit  | PUT    | {   "amount": 1000}                              | Add a given value to a wallet's balance. A value is represented in 1/100 of unit. 1 full-unit = 100        | {   "balance": "10.00 EUR" }                                   |
+| /wallets/{id}/withdraw | PUT    | {   "amount": 500 }                              | Subtract a given value from a wallet's balance. A value is represented in 1/100 of unit. 1 full-unit = 100 | {   "balance": "5.00 EUR" }                                    |
 
 #### Commands
 

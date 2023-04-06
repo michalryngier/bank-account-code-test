@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use App\WalletManagement\Application\Command\IncreaseBalanceCommand;
 use App\WalletManagement\Application\Command\DecreaseBalanceCommand;
 
-#[Route('/wallet')]
+#[Route('/wallets')]
 class WalletController extends AbstractController
 {
     public function __construct(
