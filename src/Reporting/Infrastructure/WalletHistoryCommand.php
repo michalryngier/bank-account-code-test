@@ -2,6 +2,8 @@
 
 namespace App\Reporting\Infrastructure;
 
+use Exception;
+use Ramsey\Uuid\Uuid;
 use App\Reporting\Domain\Enum\ReportFormat;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -9,10 +11,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use App\Shared\Domain\Exception\WalletNotFoundException;
 use App\Shared\Domain\Exception\DirectoryNotFoundException;
 use App\Shared\Domain\Exception\InvalidReportFormatException;
 use App\Reporting\Domain\Wallet\WalletReportingRepositoryInterface;
 use App\Reporting\Application\ReportGenerator\WalletOperationsReportGeneratorFactoryInterface;
+use Ramsey\Uuid\Exception\InvalidUuidStringException;
 
 #[AsCommand(
     name: 'app:wallet:history',
@@ -34,12 +38,26 @@ class WalletHistoryCommand extends Command
             ->addArgument('format', InputArgument::REQUIRED, 'Report file format');
     }
 
+    /**
+     * @throws WalletNotFoundException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $wallet = $this->walletRepository->find($input->getArgument('wallet-id'));
-        $reportFormat = ReportFormat::tryFrom(strtolower($input->getArgument('format')));
         $errorMessage = "An error occurred during report generation: {message}";
+
+        try {
+            $walletId = Uuid::fromString($input->getArgument('wallet-id'));
+            $wallet = $this->walletRepository->find($walletId);
+        } catch (InvalidUuidStringException $e) {
+            $io->error(str_replace(['{message}'], $e->getMessage(), $errorMessage));
+
+            return Command::FAILURE;
+        }
+
+        WalletNotFoundException::throwWhen(is_null($wallet), $walletId);
+
+        $reportFormat = ReportFormat::tryFrom(strtolower($input->getArgument('format')));
 
         try {
             $reportGenerator = $this->reportGeneratorFactory->create($reportFormat);
